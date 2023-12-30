@@ -1,0 +1,25 @@
+\subsection{Indipendenza statistica}
+
+
+\begin{Mybox}
+    \begin{definizione}[Indipendenza statistica]
+       Due vettori aleatori $\mathbf{X},\mathbf{Y}$ sono \emph{statisticamente indipendenti} se e solo se
+    \begin{equation}
+        p(\mathbf{x},\mathbf{y})=p(\mathbf{x})p(\mathbf{y})\label{eq:indipendenza}
+    \end{equation}
+    \end{definizione}
+\end{Mybox}
+
+
+\noindent Intuitivamente, due vettori aleatori $\mathbf{X}$ e $\mathbf{Y}$ sono indipendenti se la 
+conoscenza dei valori assunti da uno dei due non dà nessuna informazione sui valori assunti dall'altro. 
+
+
+
+Qualora i vettori $\mathbf{X}$ e $\mathbf{Y}$ siano statisticamente indipendenti, risulta che:
+\begin{align}
+    p(\mathbf{y}| \mathbf{x}) & = p(\mathbf{y}) \\
+    p(\mathbf{x}| \mathbf{y}) & = p(\mathbf{x}) \\
+    \mathbb{V}ar[\mathbf{X}+\mathbf{Y}] & = \mathbb{V}ar[\mathbf{X}]+\mathbb{V}ar[\mathbf{Y}] \\
+    \text{Cov}[\mathbf{X},\mathbf{Y}]   & = \bm{0}
+\end{align}

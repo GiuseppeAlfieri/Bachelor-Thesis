@@ -1,0 +1,48 @@
+
+\section{Tassonomia dei modelli generativi}
+
+Sebbene in questa trattazione si investigherà dettagliatamente solo una particolare categoria di modelli diffusione (i.e.\ i modelli di diffusione del rumore (DDPM)), 
+è bene inquadrare il ruolo di quest'ultimi nel contesto più ampio dei modelli generativi che si avvalgono del metodo di massima verosimiglianza (Appendice~\ref{appendix:MLE}).
+\begin{oss}
+A rigore non tutti i modelli generativi ricorrono al metodo della massima verosimiglianza: le GAN, ad esempio, non utilizzano il metodo di massima verosimiglianza.
+Tuttavia, “\emph{ignorando quei modelli che non ricorrono alla massima verosimiglianza, e concentrandosi sulla 
+versione di massima verosimiglianza dei modelli che solitamente non utilizzano tale metodo (come le GAN), 
+si possono eliminare alcune delle differenze che più distraggono tra
+modelli diversi}”(Goodfellow, $2016$~\cite{goodfellowNIPS2016Tutorial2017}), a beneficio di una più compatta visione d'insieme dei modelli generativi.
+\end{oss}
+\begin{figure}
+  \centering
+  \includestandalone[mode=image,scale=0.8]{Images/tikz/gen_models_mindmap_rgb}
+  \caption{Tassonomia dei modelli generativi. Adattato da~\cite{fosterGenerativeDeepLearning2023,goodfellowNIPS2016Tutorial2017}.}.
+  \label{fig:gen_models_taxonomy}
+\end{figure}
+\noindent I modelli generativi che sottendono il ricorso al metodo della massima verosimiglianza (Appendice~\ref{appendix:MLE}) 
+differiscono per il modo in cui rappresentano, o approssimano, la distribuzione di probabilità $p_{\bm{\theta}}(\mathbf{x})$\cite{goodfellowNIPS2016Tutorial2017}.
+
+\noindent In letteratura si ravvisano tre approcci possibili~\cite{fosterGenerativeDeepLearning2023} nella modellazione di $p_{\bm{\theta}}(\mathbf{x})$:
+\begin{itemize}
+\item modellare \emph{esplicitamente} la suddetta distribuzione di probabilità.
+\item modellare \emph{esplicitamente} un'\emph{approssimazione} della distribuzione di probabilità $p_\theta(\mathbf{x})$. 
+\item modellare \emph{implicitamente} la distribuzione di probabilità $p_{\bm{\theta}}(\mathbf{x})$, delegando ad un processo stocastico la creazione dei dati.
+\end{itemize}
+
+\noindent In Figura~\ref{fig:gen_models_taxonomy} è riportata una \emph{tassonomia} dei modelli generativi.
+
+\begin{oss}
+Le famiglie di modelli riportate in Figura~\ref{fig:gen_models_taxonomy} non sono mutuamente esclusive: 
+in letteratura si individuano molti esempi di modelli che sono degli ibridi tra approcci differenti.
+Nella suddetta tassonomia, quindi, le diverse famiglie di modelli vanno interpretate come \emph{approcci generali} alla modellazione generativa, piuttosto 
+che architetture esplicite di modelli~\cite{fosterGenerativeDeepLearning2023}.
+\end{oss}
+
+\noindent I modelli a densità implicita (\emph{Implict density models}) “non mirano a stimare la densità 
+di probabilità $p_\theta(\mathbf{x})$, ma si concentrano unicamente sulla produzione di un processo stocastico 
+che genera direttamente i dati”~\cite{fosterGenerativeDeepLearning2023}.
+
+\medskip
+\noindent I modelli a densità esplicita (\emph{Explicit density models}) si possono ulteriormente suddividere in quelli che ottimizzano direttamente 
+la distribuzione di probabilità (\emph{tractable models}), e quelli che ottimizzano un'approssimazione della stessa.
+
+\medskip
+\noindent “\emph{Un filo conduttore che attraversa tutti i tipi di modelli generativi è il deep learning.
+ Quasi tutti i modelli generativi più sofisticati sottendono il ricorso a reti neurali.}”~\cite{fosterGenerativeDeepLearning2023}.

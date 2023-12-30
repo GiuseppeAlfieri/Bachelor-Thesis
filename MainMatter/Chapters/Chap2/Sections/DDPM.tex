@@ -1,0 +1,25 @@
+\section{Modelli probabilistici di diffusione del rumore (DDPM) }
+
+
+I modelli probabilistici di diffusione del rumore (DDPM) sono stati introdotti in un articolo pubblicato nell'estate del 2020 (Ho et al.,~\cite{ho2020}) 
+che ha segnato un punto di svolta nell'ambito dei modelli di diffusione e della modellazione generativa.
+
+\medskip
+\noindent La \emph{pipeline} di un DDPM è la seguente:
+\begin{itemize}
+\item nel \emph{processo di diffusione in avanti}, un'immagine è corrotta dal rumore fino a risultare, all'acme del processo, indistinguibile dallo stesso. 
+La diffusione in avanti è funzionale a ricondursi, da un distribuzione di probabilità arbitrariamente complessa dell'immagine di partenza, al rumore puro che, invece, esibisce una distribuzione nota e 
+facilmente manipolabile.
+\item nel \emph{processo di diffusione inversa}, con l'ausilio di una rete neurale, si rimuove progressivamente il rumore, ripercorrendo a ritroso la diffusione in avanti, fino a pervenire all'immagine scevra da rumore. 
+\end{itemize}
+
+
+\input{MainMatter/Chapters/Chap2/Sections/SubSections/Forward_Process.tex}
+
+\input{MainMatter/Chapters/Chap2/Sections/SubSections/Reverse_Process.tex}
+
+\input{MainMatter/Chapters/Chap2/Sections/SubSections/Training.tex}
+
+\input{MainMatter/Chapters/Chap2/Sections/SubSections/Sampling.tex}
+
+\input{MainMatter/Chapters/Chap2/Sections/SubSections/Prestazioni.tex}

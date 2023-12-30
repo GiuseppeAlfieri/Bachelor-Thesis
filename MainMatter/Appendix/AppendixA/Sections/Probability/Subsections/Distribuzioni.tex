@@ -1,0 +1,74 @@
+\subsection{Distribuzioni di probabilità}
+
+Si consideri un vettore aleatorio\footnote{$T$ è l'operatore di \emph{trasposizione}} $\mathbf{X}=[X_1,X_2,\dots,X_N]^T$.
+\begin{Mybox}
+    \begin{definizione}[CDF congiunta]
+        Si definisce \emph{funzione di distribuzione cumulativa} (CDF) congiunta di $\mathbf{X}$ la funzione:
+        \begin{equation}
+            F_{\mathbf{X}}(\mathbf{x})\colon\mathbf{x}\in\mathbb{R}^N \longrightarrow P(\{X_1\leq x_1\},\dots,\{X_N\leq x_N\})
+        \end{equation} 
+    \end{definizione}
+\end{Mybox}
+
+\smallskip
+\noindent Se le componenti del vettore $\mathbf{X}$ sono tutte \emph{v.a.\ discrete}, allora la caratterizzazione 
+viene spesso effettuata introducendo la
+\emph{f}unzione \emph{m}asse di \emph{p}robabilità (\emph{pmf}) congiunta.
+
+\smallskip
+\begin{Mybox}
+    \begin{definizione}[\emph{pmf} congiunta]
+    \begin{equation}
+        p_{\mathbf{X}}(\mathbf{x})\colon\mathbf{x}=(x_1,\dots,x_N)\in \prod_{i = 1}^{N}\mathcal{A}_i  \longrightarrow P\Biggl(\bigcap_{i=1}^{N}\{X_i=x_i\}\Biggr)
+    \end{equation}
+    dove $\mathcal{A}_i$ è l'alfabeto della componente $i$-esima.
+    \end{definizione}  
+\end{Mybox}
+
+\noindent Analogamente, nel caso in cui le componenti di $\mathbf{X}$ siano \emph{v.a.\ continue} si ricorre alla seguente caratterizzazione alternativa.
+
+
+\begin{Mybox}
+    \begin{definizione}[\emph{pdf} congiunta]
+    Si definisce \emph{pdf} congiunta di $\mathbf{X}$ la derivata mista, di ordine $N$, della
+    CDF congiunta rispetto a tutte le variabili:
+    \begin{equation}
+         f_{\mathbf{X}}(\mathbf{x})\triangleq \frac{\partial^N F_{\mathbf{X}}(x_1,x_2,\dots,x_N)}{\partial x_1 \dots\partial x_N}
+    \end{equation}
+    \end{definizione}  
+\end{Mybox}
+\medskip
+\begin{oss}[Marginalizzazione]
+Dalla \emph{pdf} congiunta di un vettore aleatorio si può desumere la \emph{pdf} congiunta di un qualsiasi sottovettore, in particolare le \emph{pdf} 
+delle singole variabili aleatorie (\emph{pdf} marginali). Risulta che:
+\begin{equation}
+    f_{X_i}(x_i)= \int_{-\infty}^{+\infty}  f_{\mathbf{X}}(x_1,\dots,x_N) \,dx_1\,\dots,\,dx_{i-1},\,dx_{i+1},\dots,\,dx_N \label{eq:marginalizzazione}
+\end{equation}
+La \emph{ratio} è quella di integrare la \emph{pdf} congiunta rispetto alle variabili che non interessano ai fini del 
+calcolo della \emph{pdf} marginale.
+\end{oss}
+\medskip
+\begin{Mybox2}
+    \begin{oss}[Notazione]
+    Nel prosieguo si utilizzerà la dizione “\emph{distribuzione}” e la notazione $p_{\mathbf{X}}(\mathbf{x})$ 
+    per riferirsi sia alla \emph{pmf} che alla \emph{pdf} indistintamente.
+    Coerentemente con la maggior parte della letteratura, si delega al contesto 
+    l'attribuzione della corretta \emph{semantica} alla notazione.
+    \end{oss}
+\end{Mybox2}
+
+\subsubsection{Distribuzioni condizionate}
+
+\begin{Mybox}
+    \begin{definizione}Siano $\mathbf{X}$ e $\mathbf{Y}$ due vettori aleatori. Risulta che:
+        \begin{equation}
+         p_{\mathbf{X}| \mathbf{Y}}(\cdot |\mathbf{y})\colon \mathbf{x}\in\mathbb{R}^N \longrightarrow \frac{p_{\mathbf{XY}}(\mathbf{x},\mathbf{y})}{p_{\mathbf{Y}}(\mathbf{y})}
+        \end{equation}
+    \end{definizione}  
+\end{Mybox}
+\noindent Di seguito vengono riportate la regola della catena (\emph{chain rule})~\eqref{eq:chain_rule} e la 
+\emph{legge di Bayes}~\eqref{eq:Bayes}:
+\begin{align}
+    p_{\mathbf{X}\mathbf{Y}}(\mathbf{x},\mathbf{y})&=p_{\mathbf{X}| \mathbf{Y}}(\mathbf{x} |\mathbf{y})p_{\mathbf{Y}}(\mathbf{y})=p_{\mathbf{Y}| \mathbf{X}}(\mathbf{y}|\mathbf{x})p_{\mathbf{X}}(\mathbf{x})\label{eq:chain_rule}\\
+    p_{\mathbf{X}| \mathbf{Y}}(\mathbf{x} |\mathbf{y})&=p_{\mathbf{Y}| \mathbf{X}}(\mathbf{y}|\mathbf{x})\,\frac{p_{\mathbf{X}}(\mathbf{x})}{p_{\mathbf{Y}}(\mathbf{y})}\label{eq:Bayes}
+\end{align}

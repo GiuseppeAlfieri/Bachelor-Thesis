@@ -1,0 +1,39 @@
+\subsection{Catena Markoviana}\label{ssec:markov_chain}
+
+Siano $\{\mathbf{X}_i\}_{i\in\mathbb{N}\cup0}$ una sequenza di vettori aleatori aventi tutti lo stesso alfabeto 
+$\mathcal{A}_{\mathbf{X}_i}=\mathcal{X}$. 
+
+\begin{Mybox}
+\begin{definizione}[Proprietà markoviana]\label{def:markov_property}La sequenza $\{\mathbf{X}_i\}$ è una \emph{catena markoviana} se sussiste la seguente proprietà:
+    \begin{equation}
+    \begin{split}
+        &p(\mathbf{x}_n | \mathbf{x}_{n-1},\dots,\mathbf{x}_0)=
+        p(\mathbf{x}_n | \mathbf{x}_{n-1}) \\
+        & \forall n\in\mathbb{N},\, \forall (\mathbf{x}_0,\dots,\mathbf{x}_n)\in\mathcal{X}^n \label{eq:markov_property}
+    \end{split}
+    \end{equation}
+\end{definizione}
+\end{Mybox}
+
+\begin{oss}[Interpretazione]
+Interpretando $n-1$ come l'istante presente, $n-j$ (con $j\geq2$) come il passato e $n$ come futuro,
+la proprietà markoviana~\eqref{eq:markov_property} asserisce che, in una catena markoviana, 
+il futuro è indipendente dal passato dato il presente~\cite{conteFenomeniAleatori2006}.
+\end{oss}
+\bigskip
+\begin{oss}
+Avvalendosi della proprietà markoviana, la distribuzione congiunta di $\mathbf{X}_0,\mathbf{X}_1,\dots,\mathbf{X}_n$ ammette 
+la seguente riformulazione:
+\begin{align}
+p(\mathbf{x}_0,\dots,\mathbf{x}_n) &= p(\mathbf{x}_n|\mathbf{x}_{n-1},\dots,\mathbf{x}_0)\,p(\mathbf{x}_{n-1}|\mathbf{x}_{n-2},\dots,\mathbf{x}_0)\dots \label{eq:chain1}\\
+                                   &\dots
+                                   p(\mathbf{x}_1|\mathbf{x}_0)\,p(\mathbf{x}_0) \label{eq:chain2}\\
+                                   &=p(\mathbf{x}_n|\mathbf{x}_{n-1})\,p(\mathbf{x}_{n-1}|\mathbf{x}_{n-2})\dots p(\mathbf{x}_1|\mathbf{x}_0)\,p(\mathbf{x}_0)\label{eq:chain3} \\
+                                   &=p(\mathbf{x}_0) \prod_{j=1}^n p(\mathbf{x}_j|\mathbf{x}_{j-1})
+\end{align}
+dove
+\begin{itemize}
+    \item nella~\eqref{eq:chain1} si è ricorsi alla \emph{chain rule}~\eqref{eq:chain_rule}.
+    \item nel passaggio~\eqref{eq:chain2} alla~\eqref{eq:chain3} si è sfruttata la proprietà markoviana~\eqref{eq:markov_property}.
+\end{itemize}
+\end{oss}

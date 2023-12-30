@@ -1,0 +1,146 @@
+% arara: pdflatex: { shell: yes }
+% arara: biber
+% arara: pdflatex
+% arara: pdflatex
+%
+
+\pdfminorversion=7  % see https://www.overleaf.com/learn/latex/%5Cpdfminorversion and https://www.overleaf.com/learn/latex/%5Cpdfinclusionerrorlevel
+                    % and the answer in https://tex.stackexchange.com/questions/542343/epstopdf-pdfminorversion-7-error
+
+
+\documentclass[a4paper, 12pt, oneside]{book}
+
+
+%-----------------------------------------------------------------------------
+% Packages
+%-----------------------------------------------------------------------------
+\usepackage[T1]{fontenc}            % Font encoding
+\usepackage[utf8]{inputenc}         % Input encoding
+\usepackage[english,italian]{babel} % Text Language (secondaria, primaria)
+\usepackage[babel]{csquotes}        % Dipendenza di babel
+\usepackage{microtype}              % Improves text writing
+\usepackage[backend=biber,autolang=hyphen]{biblatex}% Imports biblatex package
+\setcounter{biburlnumpenalty}{9000}
+\setcounter{biburlucpenalty}{9000}
+\setcounter{biburllcpenalty}{9000}
+\addbibresource{BackMatter/Tesi.bib}% Import the bibliography file
+\usepackage{standalone}
+\usepackage{graphicx}               % Required for inserting images
+\graphicspath{ {./Images/} }        % Folder path to images. Path relative to the main .tex file  
+\usepackage{subfig}
+\usepackage{caption}
+\captionsetup{format=hang,labelfont=bf}
+\usepackage{float}                  % For figures
+\usepackage[x11names]{xcolor}
+\usepackage{fancyhdr}               % For the headings      
+\usepackage{listings}               % Uso dei listing per il codice
+\usepackage{svg}
+\usepackage{lipsum}                 % Dummy package
+\usepackage{afterpage}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{tikz}
+\usetikzlibrary{mindmap,shadows}
+\usepackage{shapepar}
+\usepackage{titlesec}
+\usepackage{comment}
+\usepackage[font={itshape,small}]{quoting}
+%\quotingsetup{font=small}
+\usepackage{mathtools} % loads also amsmath package
+\usepackage{amssymb}
+\usepackage{amsfonts} % for \mathbb
+\usepackage{amsthm}
+\usepackage{bm}  % for accessing bold math symbols
+\usepackage{cancel}
+\usepackage{booktabs} % for tables
+\usepackage{algorithm}
+\usepackage{algpseudocode}  %load automatically the algorithmicx package
+\usepackage{customization} % IMport custom preamble 
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    pdfstartview = XYZ null null 1.00,  % open the generated pdf with 100% zoom by default
+    pdftitle={Tesi}, 
+}
+
+\captionsetup[algorithm]{name=Algoritmo}
+
+
+
+
+%-----------------------------------------------------------------------------
+% Document Start
+%-----------------------------------------------------------------------------
+\begin{document}
+
+
+
+%-------------------------------------------------------------------------
+\frontmatter
+%-------------------------------------------------------------------------
+\include{FrontMatter/frontespizio}
+\include{FrontMatter/dedica}
+\include{FrontMatter/blank_page}
+\include{FrontMatter/abstract}
+%\addcontentsline{toc}{chapter}{\numberline{}Abstract} % This will add a chapter-level (chapter) entry to the table of contents (toc) without a chapter number (\numberline{})
+
+\tableofcontents % Prints the main table of contents
+
+
+
+%-------------------------------------------------------------------------
+%-------------------------------------------------------------------------
+\mainmatter
+%-------------------------------------------------------------------------
+%-------------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------------
+% Introduzione
+%-------------------------------------------------------------------------
+\include{MainMatter/Introduzione/introduzione}
+
+
+
+%-------------------------------------------------------------------------
+% Capitoli
+%-------------------------------------------------------------------------
+\include{MainMatter/Chapters/Chap1/chap1}
+\include{MainMatter/Chapters/Chap2/chap2}
+\include{MainMatter/Chapters/Chap3/conclusion}
+
+
+%-------------------------------------------------------------------------
+% Appendici
+%-------------------------------------------------------------------------
+
+
+\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
+\include{MainMatter/Appendix/AppendixA/appendice_a}
+\include{MainMatter/Appendix/appendice_b}
+\include{MainMatter/Appendix/appendice_c}
+
+
+
+
+
+%-------------------------------------------------------------------------
+\backmatter
+%-------------------------------------------------------------------------
+
+
+% Bibliography
+\printbibliography[heading=bibintoc]  % Prints bibliography and display bibliography to toc
+
+
+
+% N:B IMPORTANT!!!
+%\mainmatter gives you normal chapter numbering and arabic page numbering.
+%\frontmatter gives you UNNUMBERED chapters (so chapter* is redundant) and roman page numbering.
+%\backmatter gives you UNNUMBERED chapters (so chapter* is redundant) and arabic page numbering.
+
+\include{BackMatter/Acknowledgements}
+
+
+
+\end{document}
+%- ---------------------------------------------------------

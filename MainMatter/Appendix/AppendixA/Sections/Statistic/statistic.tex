@@ -1,0 +1,99 @@
+\section{Problema della stima dei parametri}\label{sec:statistica}
+
+\subsection{Modellazione parametrica}
+
+In statistica, un modello parametrico è una famiglia di distribuzioni $p_{\bm{\theta}}(\mathbf{x})$ descritta 
+da un numero finito di \emph{parametri} $\bm{\theta} \in \Theta \subseteq \mathbb{R}^k$, con $\Theta$ detto \emph{spazio dei parametri}.
+
+
+\subsection{Funzione di verosimiglianza}\label{ssec:verosimiglianza}
+
+Sia $\mathbf{X}$ un vettore aleatorio e $\mathbf{x} \in \mathbb{R}^N$ una sua possibile realizzazione.
+
+\begin{Mybox}
+    \begin{definizione}
+        Si definisce funzione di verosimiglianza (\emph{likelihood}) la funzione:
+        \begin{equation}
+        \bm{\theta_i} \in \Theta \longmapsto \mathcal{L}_{\mathbf{x}}(\bm{\theta_i} )= p(\mathbf{x} \mid \bm{\theta}=\bm{\theta_i}) = p_{\bm{\theta_i}}(\mathbf{x})\label{eq:likelihood}
+        \end{equation}   
+    \end{definizione}
+\end{Mybox}
+
+\smallskip
+\begin{oss}
+Si potrebbe essere erroneamente indotti a ritenere che $\bm{\theta}$, dal momento che si trova a destra del 
+condizionamento in $p(\mathbf{x} \mid \bm{\theta}=\bm{\theta_i})$~\eqref{eq:likelihood}, debba essere considerato 
+come osservato e fissato: tale interpretazione è errata.
+Come suggerisce la notazione, $\mathcal{L}_{\mathbf{x}}(\bm{\theta})$ è una funzione del parametro $\bm{\theta}$, che varia, mentre il dato 
+$\mathbf{x}$ è fissato. Inoltre la funzione di verosimiglianza~\eqref{eq:likelihood} non è una distribuzione di probabilità in $\bm{\theta}$.
+\end{oss}
+\begin{oss}
+Allorché risulti chiaro dal contesto, si scrive semplicemente $\mathcal{L}(\bm{\theta})$, 
+omettendo il pedice $\mathbf{x}$ che si riferisce ai dati osservati. 
+\end{oss}
+
+\begin{oss}[Interpretazione]
+La distribuzione $p(\mathbf{x} \mid \bm{\theta}=\bm{\theta_i})$ modella l'incertezza dei 
+dati $\mathbf{x}$ per una certa istanza $\bm{\theta_i}$ del parametro $\bm{\theta}$. Dunque, avvalendosi della 
+funzione di verosimiglianza, per dei dati fissati $\mathbf{x}$, è possibile capire, al variare del parametro $\bm{\theta}$, qual'è 
+l'istanza del parametro che ha generato i dati con maggiore probabilità.
+In un'ottica complementare, riguardando i dati come fissati (poiché osservati), e variando il parametro $\bm{\theta}$, la funzione 
+di verosimiglianza $\mathcal{L}(\bm{\theta})$ misura quanto è probabile una particolare scelta di $\bm{\theta}$ per le osservazioni $\mathbf{x}$~\cite{deisenrothMML2020}.
+\end{oss}
+
+\bigskip
+\noindent Se si dispone di un dataset $\mathcal{X}=\{\mathbf{x}_1,\dots,\mathbf{x}_M\}$ di osservazioni tra loro 
+indipendenti allora, in virtù della~\eqref{eq:indipendenza}, la funzione di verosimiglianza è:
+\begin{equation}
+    \mathcal{L}_{\mathcal{X}}(\bm{\theta})=p(\mathcal{X}|\bm{\theta})=p_{\bm{\theta}}(\mathbf{x}_1,\dots,\mathbf{x}_M)=\prod_{\mathbf{x} \in \mathcal{X}} p_{\bm{\theta}}(\mathbf{x}) \label{eq:datasetlikelihood}
+\end{equation}
+
+
+\noindent In letteratura si considera il \emph{logaritmo} della funzione di verosimiglianza cambiato di segno\footnote{il cambiamento di segno è imputabile alla convenzione vigente nella letteratura sull'ottimizzazione numerica, 
+in cui si predilige lo studio della minimizzazione di funzioni.} (\emph{negative log-likelihood}):
+\begin{equation}
+   {\ell}_{\mathbf{x}}(\bm{\theta})=-\log(\mathcal{L}_{\mathbf{x}}(\bm{\theta}))=-\log(p_{\bm{\theta}}(\mathbf{x}))\label{eq:nll}
+\end{equation}
+
+\noindent Riformulando la~\eqref{eq:datasetlikelihood} con il logaritmo, risulta che:
+\begin{equation}
+    {\ell}_{\mathcal{X}}(\bm{\theta})=-\log\bigl(\mathcal{L}_{\mathcal{X}}(\bm{\theta})\bigr)=-\log\Bigl(\prod_{\mathbf{x} \in \mathbf{\mathcal{X}}} p_{\bm{\theta}}(\mathbf{x})\Bigr)=
+    \sum_{\mathbf{x} \in \mathbf{\mathcal{X}}}-\log p_{\bm{\theta}}(\mathbf{x}) \label{eq:loglikelihood}
+\end{equation}
+
+
+
+
+
+
+\subsection{Metodo della massima verosimiglianza}
+\label{appendix:MLE}
+
+Nel \emph{metodo della massima verosimiglianza} (MLE) si massimizza la 
+funzione di verosimiglianza per trovare un modello che ben si adatti ai dati di interesse:
+
+\begin{equation}
+\hat{\bm{\theta}}=\operatorname{argmax}_{\bm{\theta} \in \Theta} \mathcal{L}_{\mathbf{x}}(\bm{\theta}) \label{eq:MLE}
+\end{equation}
+
+\noindent Poiché le reti neurali \emph{minimizzano} una funzione di costo, la~\eqref{eq:MLE} può essere riformulata minimizzando la \emph{negative log-likelihood}:
+\begin{equation}
+\hat{\bm{\theta}}=\operatorname{argmin}_{\bm{\theta}}\bigl({\ell}_{\mathbf{x}}(\bm{\theta})\bigr)=\operatorname{argmin}_{\bm{\theta}}\bigl(-\log p_{\bm{\theta}}(\mathbf{x})\bigr)\label{eq:log_MLE}
+\end{equation}
+Il minimizzare la \emph{negative log-likelihood} ha un duplice beneficio~\cite{deisenrothMML2020}:
+\begin{itemize}
+\item il prodotto delle $M$ probabilità nella~\eqref{eq:datasetlikelihood} ($M$ è la cardinalità del dataset) è soggetto a problemi di \emph{underflow} numerico, 
+poiché non si possono rappresentare accuratamente numeri molto piccoli come $10^{-256}$. Il logaritmo 
+ovvia a tale problema trasformando i prodotti in somme.
+\item trasformando i prodotti in somme mediante l'uso del logaritmo, 
+il gradiente dei termini nella~\eqref{eq:loglikelihood} è la somma dei gradienti dei singoli addendi. 
+In tal modo si evita di ricorrere all'applicazione reiterata della regola del prodotto per calcolare 
+il gradiente del prodotto di $M$ termini.
+\end{itemize}
+
+\noindent In questa trattazione si investigano i modelli generativi che si avvalgono del metodo di massima verosimiglianza,
+dove i parametri $\bm{\theta}$ sono i pesi delle reti neurali del modello.
+L'obiettivo è quello di trovare i valori dei suddetti parametri che massimizzano la verosimiglianza 
+(o equivalentemente, minimizzano la \emph{negative log-likelihood}) di osservare i dati nel dataset.
+Tuttavia, per problemi ad alta dimensionalità dei dati coinvolti, non è possibile, generalmente, calcolare direttamente $p_{\bm{\theta}}(\mathbf{x})$ 
+che risulta intrattabile (si veda~\eqref{eq:intractable_likelihood}).
